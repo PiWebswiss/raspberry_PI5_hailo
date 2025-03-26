@@ -7,7 +7,7 @@ To use this application, please install the [DeGirum PySDK](https://github.com/D
 ### Install Requirements
 
 ```bash
-pip install fastapi uvicorn
+pip install fastapi uvicorn degirum degirum_tools
 ```
 
 Make sure to also install the DeGirum SDK as described in their documentation.
