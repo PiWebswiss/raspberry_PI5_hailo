@@ -2,6 +2,12 @@
 
 I'm using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page.
 
+<video autoplay loop muted playsinline width="640">
+  <source src="raspberry_PI5_hailo/Ressources/saved_inference_2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+
 I'm still in development, so the HTML UI is not finished yet. I’ve only set it up for quick prototyping.
 
 I'm still testing whether WebSocket is faster than HTTP with the MJPEG format.
