@@ -1,12 +1,11 @@
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
 I'm using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page.
+## Demo 1
+![Demo](raspberry_PI5_hailo/Ressources/demo-1.gif)
 
-<video autoplay loop muted playsinline width="640">
-  <source src="raspberry_PI5_hailo/Ressources/saved_inference_2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-
+## Demo 2
+![Demo](raspberry_PI5_hailo/Ressources/demo-2.gif)
 
 I'm still in development, so the HTML UI is not finished yet. I’ve only set it up for quick prototyping.
 
