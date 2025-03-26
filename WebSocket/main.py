@@ -1,11 +1,13 @@
-import os
 import cv2
-import asyncio
+# import asyncio
 import degirum as dg
 import degirum_tools
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from starlette.websockets import WebSocketDisconnect
+
+# Example video file
+video_source = '../Ressources/road_trafifc.mp4'
 
 # Load the model
 model = dg.load_model(
@@ -16,10 +18,12 @@ model = dg.load_model(
     device_type="HAILORT/HAILO8L"
 )
 
-video_source = '../Ressources/example_640.mp4'
+
+# 2. FastAPI app
 app = FastAPI()
 
-
+# 3. Setup JavaSript WebSocket canvas HTML
+### I will change that for now is works :)
 @app.get("/", response_class=HTMLResponse)
 def index():
     return """
@@ -49,7 +53,7 @@ def index():
     </html>
     """
 
-
+# 5. Performe object detection and stream with boundary box using Websocket
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
