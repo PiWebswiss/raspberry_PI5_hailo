@@ -1,17 +1,21 @@
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
 I'm using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page.
-## Demo 1
-![Demo](./raspberry_PI5_hailo/Ressources/demo-1.gif)
-
-## Demo 2
-![Demo](./raspberry_PI5_hailo/Ressources/demo-2.gif)
 
 I'm still in development, so the HTML UI is not finished yet. I’ve only set it up for quick prototyping.
 
 I'm still testing whether WebSocket is faster than HTTP with the MJPEG format.
 
+## Screenshot of a Video Stream via WebSocket
+![alt text](Ressources/Screenshot.png)
+
 I load the YOLOv8 model tailored for the Hailo8L device using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
+
+## Demo 1
+![alt text](Ressources/demo-1.gif)
+
+## Demo 2
+![alt text](Ressources/demo-2.gif)
 
 
 ## **Repository Structure**

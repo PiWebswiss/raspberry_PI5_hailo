@@ -2,6 +2,9 @@
 
 To use this application, please install the [DeGirum PySDK](https://github.com/DeGirum/hailo_examples/blob/main/README.md).
 
+## Screenshot of a Video Stream via WebSocket
+![alt text](Ressources/Screenshot.png)
+
 ---
 
 ### Install Requirements
