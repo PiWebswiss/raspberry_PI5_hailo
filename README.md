@@ -57,7 +57,7 @@ To set up and run the application:
    ```
 
 3. **Access the Video Stream**:
-   - Open a web browser and navigate to `http://<raspberry-pi-ip>:8000/` to view the AI-processed video stream.
+   - Open a web browser and navigate to `http://127.0.0.1:8001/` to view the AI-processed video stream.
 
 ## **Additional Notes**
 
