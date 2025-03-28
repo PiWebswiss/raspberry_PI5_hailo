@@ -5,7 +5,7 @@ I'm using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and
 To use this application, please install the [DeGirum PySDK](https://github.com/DeGirum/hailo_examples/blob/main/README.md).
 
 ## Screenshot of a Video Stream via WebSocket
-![alt text](../Ressources/Screenshot.png)
+![alt text](../Ressources/Screenshot-FPS.png)
 
 ---
 
