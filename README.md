@@ -34,7 +34,7 @@ The `WebSocket` directory contains the **WebSocket Streaming**: Streams tha proc
 
 2. **Process Video Input**:  
    - Open a video file or stream as the input source.  
-   - Read frames sequentially, perform object detection inference on each frame, and overlay the detection results on **bounding boxes and labels** — all that is done by the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
+   - Read frames sequentially, perform object detection inference on each frame, and overlay the detection results on **bounding boxes and labels** using [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
 3. **Stream Processed Video**:  
    - Serve the processed frames over HTTP or WebSocket using FastAPI.  
