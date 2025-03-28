@@ -23,7 +23,7 @@ I load the YOLOv8 model tailored for the Hailo8L device using the [DeGirum SDK](
 The `HTTP` directory contains the **HTTP Streaming**: Streams the processed video frames to clients using the MJPEG format via FastAPI routes.
 
 
-The `WebSocket` directory contains the **WebSocket Streaming**: Streams tha processed video frames to clients using the WebSocket via FastAPI routes.
+The `WebSocket` directory contains the **WebSocket Streaming**: Streams that processed video frames to clients using the WebSocket via FastAPI routes.
 
 
 ## **Functionality Overview**
@@ -46,7 +46,7 @@ The `WebSocket` directory contains the **WebSocket Streaming**: Streams tha proc
 To set up and run the application:
 
 
-1. **Intall DeGirum SDK**:
+1. **Install DeGirum SDK**:
    - Do the guided installation for [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
 2. **Clone my repo**:
