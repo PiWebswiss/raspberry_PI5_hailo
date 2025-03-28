@@ -30,11 +30,11 @@ The `WebSocket` directory contains the **WebSocket Streaming**: Streams tha proc
 
 1. **Initialize the AI Model**:  
    - Load the YOLOv8n/YOLOv11n Hailo model tailored for the Hailo8L device using the DeGirum SDK.  
-   - Configure the model with appropriate parameters such as inference host address and device types using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples) API.
+   - Configure the model with appropriate parameters such as inference host address and device types using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
 2. **Process Video Input**:  
    - Open a video file or stream as the input source.  
-   - Read frames sequentially, perform object detection inference on each frame, and overlay the detection results on **bounding boxes and labels** — all that is done by the [DeGirum SDK](https://github.com/DeGirum/hailo_examples) API.
+   - Read frames sequentially, perform object detection inference on each frame, and overlay the detection results on **bounding boxes and labels** — all that is done by the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
 3. **Stream Processed Video**:  
    - Serve the processed frames over HTTP or WebSocket using FastAPI.  
