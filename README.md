@@ -4,7 +4,7 @@
 
 I'm still in development, so the HTML UI is not finished yet. I’ve only set it up for quick prototyping.
 
-I'm still testing whether WebSocket is faster than HTTP with the MJPEG format. So far, I'm getting about double the performance using WebSocket.
+I'm still testing whether WebSocket is faster than HTTP with the MJPEG format. So far, I'm getting about **double the performance using WebSocket**.
 
 ## Screenshot of a Video Stream via WebSocket
 ![alt text](Ressources/Screenshot-FPS.png)
