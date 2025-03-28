@@ -1,6 +1,6 @@
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
- I’m using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page. All processing is done locally on the device.
+ I’m using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page. All processing is done locally on the device using a Raspberry Pi 5 with the Hailo8L AI accelerator
 
 I'm still in development, so the HTML UI is not finished yet. I’ve only set it up for quick prototyping.
 
