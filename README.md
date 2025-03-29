@@ -11,10 +11,10 @@ I'm still testing whether WebSocket is faster than HTTP with the MJPEG format. S
 
 I load the YOLOv8 model tailored for the Hailo8L device using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
-## Demo 1 using Hailo Yolo8 nano model
+## Demo 1 using Hailo Yolo11 nano model
 ![alt text](Ressources/demo-1.gif)
 
-## Demo 2 using Hailo Yolo11 nano model
+## Demo 2 using Hailo Yolo8 nano model
 ![alt text](Ressources/demo-2.gif)
 
 
@@ -24,6 +24,8 @@ The `HTTP` directory contains the **HTTP Streaming**: Streams the processed vide
 
 
 The `WebSocket` directory contains the **WebSocket Streaming**: Streams that processed video frames to clients using the WebSocket via FastAPI routes.
+
+The `Webcam` directory contains the **Webcam Streaming**: Streams that processed video frames to clients using WebSocket via FastAPI routes.
 
 
 ## **Functionality Overview**

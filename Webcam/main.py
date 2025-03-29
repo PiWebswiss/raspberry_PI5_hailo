@@ -1,18 +1,16 @@
 import cv2
 import time
 import degirum as dg
-import degirum_tools
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import HTMLResponse
 from starlette.websockets import WebSocketDisconnect
 
-# Model and video configuration
+# Degirum configuration
 inference_host_address = "@local"
 zoo_url = "degirum/hailo"
 token = ''
 device_type = "HAILORT/HAILO8L"
 model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
-video_source = '../Ressources/road_trafifc.mp4'
 
 # Load Degirum model
 model = dg.load_model(
@@ -23,17 +21,17 @@ model = dg.load_model(
     device_type=device_type
 )
 
-# Create FastAPI app
+# Initialize FastAPI
 app = FastAPI()
 
-# HTML page with canvas to display WebSocket video stream
+# HTML client interface
 @app.get("/", response_class=HTMLResponse)
 def index():
     return """
     <html>
-      <head><title>AI Video Stream via WebSocket with FPS</title></head>
+      <head><title>AI Webcam Stream with FPS</title></head>
       <body>
-        <h1>AI Video Stream via WebSocket with FPS</h1>
+        <h1>AI Webcam Stream via WebSocket with FPS</h1>
         <canvas id="canvas" width="640" height="480"></canvas>
         <script>
           const canvas = document.getElementById("canvas");
@@ -52,28 +50,40 @@ def index():
     </html>
     """
 
-# WebSocket endpoint for real-time video streaming with FPS
+# WebSocket for live webcam with AI inference
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
 
+    # Webcam initialization
+    cap = cv2.VideoCapture(0)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
     prev_frame_time = time.time()
 
     try:
-        for inference_result in degirum_tools.predict_stream(model, video_source):
-            frame = inference_result.image_overlay
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                print("Failed to capture frame from webcam.")
+                break
 
-            # Calculate and overlay FPS
+            # Run inference with Degirum
+            inference_result = model(frame)
+            annotated_frame = inference_result.image_overlay
+
+            # Calculate FPS
             new_frame_time = time.time()
             fps = 1 / (new_frame_time - prev_frame_time)
             prev_frame_time = new_frame_time
 
             fps_text = f"FPS: {fps:.0f}"
-            cv2.putText(frame, fps_text, (20, 30), cv2.FONT_HERSHEY_SIMPLEX,
-                        0.8, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.putText(annotated_frame, fps_text, (20, 30),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
 
-            # Encode frame to JPEG (you can switch to WebP by replacing '.jpg' with '.webp')
-            success, encoded_image = cv2.imencode('.jpg', frame)
+            # Encode frame for sending
+            success, encoded_image = cv2.imencode('.jpg', annotated_frame)
             if not success:
                 continue
 
@@ -81,3 +91,5 @@ async def websocket_endpoint(websocket: WebSocket):
 
     except WebSocketDisconnect:
         print("WebSocket disconnected")
+    finally:
+        cap.release()
