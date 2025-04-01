@@ -3,7 +3,7 @@
 
 **Webcam Streaming** on a Raspberry Pi 5 with a Hailo AI chip using **YOLOv11 Nano** to detect objects and stream the results live to a web page via FastAPI routes.
 
-**Webcam Streaming Demo**
+### Webcam Streaming Demo
 ![alt text](../Ressources/phone_video_demo.gif)
 
 
