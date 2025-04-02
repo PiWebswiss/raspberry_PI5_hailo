@@ -90,6 +90,6 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_bytes(encoded_image.tobytes())
 
     except WebSocketDisconnect:
-        print("WebSocket disconnected")
+        pass
     finally:
         cap.release()
