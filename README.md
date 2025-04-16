@@ -67,7 +67,7 @@ To set up and run the application:
 4. **Clone my repo**:
    ```bash
    git clone https://github.com/PiWebswiss/raspberry_PI5_hailo.git
-   cd PiWebswiss
+   cd raspberry_PI5_hailo
    ```
 
    >Then, go to the file directory `Webcam` ,``WebSocket`` or ``HTTP`` using ``cd <path>``.
