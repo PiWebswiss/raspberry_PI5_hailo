@@ -53,23 +53,31 @@ To set up and run the application:
 1. **Install DeGirum SDK**:
    - Do the guided installation for [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
-2. **Clone my repo**:
-   ```bash
-   git clone https://github.com/PiWebswiss/raspberry_PI5_hailo.git
-   ```
 
 2. **Activate the virtual environment**:
    ```bash
    source degirum_env/bin/activate
    ```
-   Then, go to the file directory ``WebSocket`` or ``HTTP`` using ``cd <path>``.
 
-2. **Run the FastAPI Server**:
+3. **Install requirements dependencies**
+   ```bash
+   pip install fastapi uvicorn degirum degirum_tools
+   ```
+
+4. **Clone my repo**:
+   ```bash
+   git clone https://github.com/PiWebswiss/raspberry_PI5_hailo.git
+   cd PiWebswiss
+   ```
+
+   >Then, go to the file directory `Webcam` ,``WebSocket`` or ``HTTP`` using ``cd <path>``.
+
+5. **Run the FastAPI Server**:
    ```bash
    uvicorn main:app --host 0.0.0.0 --port 8000
    ```
 
-3. **Access the Video Stream**:
+6. **Access the Video Stream**:
    - Open a web browser and navigate to `http://127.0.0.1:8001/` to view the AI-processed video stream.
 
 ## **Additional Notes**
