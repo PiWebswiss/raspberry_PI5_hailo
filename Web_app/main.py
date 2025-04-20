@@ -53,6 +53,7 @@ async def websocket_endpoint(websocket: WebSocket):
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
+    # start FPS
     prev_frame_time = time.time()
 
     try:
@@ -135,17 +136,32 @@ async def detect(file: UploadFile = File(...)):
 
     tmp_out_path = tempfile.mktemp(suffix=".avi")
     writer = cv2.VideoWriter(tmp_out_path, fourcc, fps, (width, height))
+    # start FPS
+    prev_frame_time = time.time()
 
     while True:
         ok, frame = cap.read()
         if not ok:
             break
-        annotated = model(frame).image_overlay
-        writer.write(annotated)
+        annotated_frame = model(frame).image_overlay
+
+        # Calculate FPS
+        new_frame_time = time.time()
+        fps = 1 / (new_frame_time - prev_frame_time)
+        prev_frame_time = new_frame_time
+
+        fps_text = f"FPS: {fps:.0f}"
+        cv2.putText(annotated_frame, fps_text, (20, 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+
+        writer.write(annotated_frame)
 
     cap.release()
     writer.release()
     os.remove(tmp_in_path)
+    
+    #### NOT the best the video is not written to the RAM but to the SSD for now !!!
+    ## TO DO  use RAM !!!
 
     # 1. Transcode AVI→MP4 with H.264 (baseline profile + faststart)
     mp4_path = tempfile.mktemp(suffix=".mp4")
@@ -168,11 +184,3 @@ async def detect(file: UploadFile = File(...)):
         media_type="video/mp4",
         filename="annotated.mp4"
     )
-
-    # stream back as AVI/MJPEG
-    """ def iterfile():
-        with open(tmp_out_path, 'rb') as f:
-            yield from iter(lambda: f.read(8192), b'')
-        os.remove(tmp_out_path)  """  # delete after sending
-
-    #return StreamingResponse(iterfile(), media_type="video/avi")
