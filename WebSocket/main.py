@@ -45,8 +45,6 @@ def index():
             const bitmap = await createImageBitmap(event.data);
             ctx.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
           };
-
-          socket.onclose = () => console.log("WebSocket closed.");
         </script>
       </body>
     </html>
