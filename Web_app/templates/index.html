@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script defer src="static/scrpt.js"></script>
-    <title>AI Webcam Stream with FPS</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script defer src="static/script.js"></script>
+  <title>Raspberry Pi 5 + Hailo AI Cam</title>
+
+  <!-- tiny dark‑glass aesthetic -->
+  <style>
+    :root {
+      --bg: #0e1117;
+      --panel: #161b22;
+      --accent: #2f81f7;
+      --text: #c9d1d9;
+      --radius: 14px;
+    }
+    * {box-sizing: border-box;font-family: system-ui, sans-serif;}
+    body{margin:0;display:flex;flex-direction:column;min-height:100vh;background:var(--bg);color:var(--text);}
+    header{padding:1rem 2rem;font-size:1.4rem;font-weight:600;text-align:center;}
+    main{flex:1;display:flex;flex-direction:column;gap:1.25rem;padding:0 2rem 2rem;}
+    .card{background:var(--panel);border-radius:var(--radius);padding:1.25rem;box-shadow:0 4px 20px #0006;}
+    canvas,img,video{max-width:100%;border-radius:var(--radius);}
+    button{cursor:pointer;background:var(--accent);color:#fff;border:none;padding:.65rem 1.4rem;border-radius:var(--radius);font-weight:600;transition:.2s}
+    button:hover{filter:brightness(1.1);}
+    #uploader{border:2px dashed var(--accent);padding:2rem;text-align:center;cursor:pointer;border-radius:var(--radius);transition:.2s}
+    #uploader.drag{background:#1d2330;}
+    .toast{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);padding:.75rem 1.25rem;background:#333;border-radius:var(--radius);color:#fff;opacity:0;pointer-events:none;transition:.3s}
+    .toast.show{opacity:1;}
+    @media(min-width:700px){main{flex-direction:row}}
+    @media(min-width:700px){.col{flex:1;}}
+  </style>
 </head>
+
 <body>
-    <h1>AI Webcam Stream via WebSocket with FPS</h1>
-    <canvas id="canvas" width="640" height="480"></canvas>
+  <header>Pi 5 Hailo AI — Live / File Detection</header>
+
+  <main>
+    <!-- LIVE STREAM -->
+    <section class="card col" id="liveCard">
+      <h2>🔴 Live stream</h2>
+      <canvas id="liveCanvas" width="640" height="480"></canvas><br>
+      <button id="startBtn">Start live stream</button>
+      <span id="fps" style="margin-left:.8rem;"></span>
+    </section>
+
+    <!-- FILE UPLOAD -->
+    <section class="card col" id="fileCard">
+      <h2>📁 Detect in image / video</h2>
+      <div id="uploader">
+        <p>Drop a file anywhere here<br><small>(or click to pick)</small></p>
+      </div>
+      <img id="resultPreview" style="display:none;margin-top:1rem;" />
+    </section>
+  </main>
+
+  <!-- toast -->
+  <div id="toast" class="toast"></div>
 </body>
 </html>
