@@ -1,4 +1,4 @@
-import cv2, time, tempfile, io, os
+import cv2, time, tempfile, subprocess, io, os
 import numpy as np
 from pathlib import Path
 import degirum as dg
@@ -6,6 +6,7 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, UploadFile, File, R
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 # Degirum configuration
 inference_host_address = "@local"
@@ -116,19 +117,23 @@ async def detect(file: UploadFile = File(...)):
     with tempfile.NamedTemporaryFile(suffix=".mp4", delete=False) as tmp_in:
         tmp_in.write(raw)
         tmp_in_path = tmp_in.name
-
+    
     cap = cv2.VideoCapture(tmp_in_path)
+    # Make sure you actually read frames
+    ok, frame = cap.read()  
+    print(f"ok = {ok} - fps={cap.get(cv2.CAP_PROP_FPS) }")
+
     if not cap.isOpened():
         os.remove(tmp_in_path)
         return {"error": "Cannot open video file"}
 
     # prepare temp file for the output MP4
-    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    fourcc = cv2.VideoWriter_fourcc(*"MJPG")
     fps    = cap.get(cv2.CAP_PROP_FPS) or 25
     width  = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-    tmp_out_path = tempfile.mktemp(suffix=".mp4")
+    tmp_out_path = tempfile.mktemp(suffix=".avi")
     writer = cv2.VideoWriter(tmp_out_path, fourcc, fps, (width, height))
 
     while True:
@@ -140,12 +145,34 @@ async def detect(file: UploadFile = File(...)):
 
     cap.release()
     writer.release()
-    os.remove(tmp_in_path)        # tidy up
+    os.remove(tmp_in_path)
 
-    # stream the resulting MP4 back to the client
-    def iterfile():
-        with open(tmp_out_path, "rb") as f:
-            yield from iter(lambda: f.read(8192), b"")
-        os.remove(tmp_out_path)   # delete after sending
+    # 1. Transcode AVI→MP4 with H.264 (baseline profile + faststart)
+    mp4_path = tempfile.mktemp(suffix=".mp4")
+    subprocess.run([
+        "ffmpeg", "-y",
+        "-i", tmp_out_path,
+        "-c:v", "libx264",
+        "-profile:v", "baseline",
+        "-preset", "veryfast",
+        "-movflags", "+faststart",
+        mp4_path
+    ], check=True)
 
-    return StreamingResponse(iterfile(), media_type="video/mp4")
+    # 2. Clean up the AVI
+    os.remove(tmp_out_path)
+
+    # 3. Return a real MP4 file
+    return FileResponse(
+        mp4_path,
+        media_type="video/mp4",
+        filename="annotated.mp4"
+    )
+
+    # stream back as AVI/MJPEG
+    """ def iterfile():
+        with open(tmp_out_path, 'rb') as f:
+            yield from iter(lambda: f.read(8192), b'')
+        os.remove(tmp_out_path)  """  # delete after sending
+
+    #return StreamingResponse(iterfile(), media_type="video/avi")
