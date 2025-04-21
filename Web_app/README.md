@@ -2,43 +2,52 @@
 <h3 style="color: red;">🚧 Disclaimer: This project is a work in progress. Please do not use the code yet.</h3>
 
 
+I'm building a user-friendly, real-time video loop web application called **`Web_app`**, which performs object detection using a Hailo model on a Raspberry Pi 5.
 
-## Raspberry Pi 5 Running Hailo Model Webcam Streaming.
-
-
-**Webcam Streaming** on a Raspberry Pi 5 with a Hailo AI chip using **YOLOv11 Nano** to detect objects and stream the results live to a web page via FastAPI routes.
-
-### Webcam Streaming Demo
-![alt text](../Ressources/phone_video_demo.gif)
+It uses a **WebRTC-based** stream to send video frames from the user to the server and back. WebRTC (~50 ms latency) is much faster than WebSocket-based solutions (~150 ms).
 
 
-To use this application, please install the [DeGirum PySDK](https://github.com/DeGirum/hailo_examples/blob/main/README.md).
+
+**In brief:**  
+The browser capture camera frames and streams them to the server using WebRTC. The server runs object detection and streams the annotated video back to the user.
+
+**Video demonstration:**
+
+*(Add your video link here)*
 
 ---
 
-### Install Requirements
-
+Install **WebRTC-based**:
 ```bash
-pip install fastapi uvicorn degirum degirum_tools
+pip install aiortc
+```
+Install **python-multipart**:
+
+- To read uploaded files sent by the user browser. 
+```bash
+pip install python-multipart
 ```
 
-Make sure to also install the [DeGirum SDK](https://github.com/DeGirum/hailo_examples) as described in their documentation.
+> Make sure that you have ``ffmpeg`` installed system-wide
 
----
+**Check that you have ``ffmpeg``**
 
-### To Run the Server
+```bash
+ffmpeg -version`
+```
+**if not installed then run:** 
 
-1. **Activate the ``degirum_env`` virtual environment**:
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
 
-   ```bash
-   source degirum_env/bin/activate
-   ```
+Then, go to the file directory ``Web_app`` using ``cd <path>``.
 
-2. **Start the FastAPI server**:
-
+**Run the FastAPI Server**:
    ```bash
    uvicorn main:app --host 0.0.0.0 --port 8000
    ```
 
-3. **Access Video Stream**:
-   - Open a web browser and navigate to `http://127.0.0.1:8001/`view the AI-processed video stream.
+**Access the Video Stream**:
+   - Open a web browser and navigate to `http://127.0.0.1:8001/`.

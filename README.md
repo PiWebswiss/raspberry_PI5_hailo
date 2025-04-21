@@ -49,7 +49,7 @@ Then, go to the file directory ``Web_app`` using ``cd <path>``.
    ```
 
 **Access the Video Stream**:
-   - Open a web browser and navigate to `http://127.0.0.1:8001/` to view the AI-processed video stream.
+   - Open a web browser and navigate to `http://127.0.0.1:8001/`.
 
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
