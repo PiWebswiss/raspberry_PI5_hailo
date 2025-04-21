@@ -29,19 +29,30 @@
     .toast.show{opacity:1;}
     @media(min-width:700px){main{flex-direction:row}}
     @media(min-width:700px){.col{flex:1;}}
+
+    .loader{
+      width:24px;height:24px;margin:0.5rem auto;
+      border:3px solid rgba(255,255,255,0.2);
+      border-top-color:var(--accent);
+      border-radius:50%;
+      animation:spin 1s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
   </style>
 </head>
 
 <body>
-  <header>Pi 5 Hailo AI — Live / File Detection</header>
+  <header>Pi 5 Hailo AI Objet Detection — Live / File</header>
 
   <main>
     <!-- LIVE STREAM -->
     <section class="card col" id="liveCard">
       <h2>🔴 Live stream</h2>
-      <canvas id="liveCanvas" width="640" height="480"></canvas><br>
+      <video id="local" autoplay muted style="display:none;"></video>
+      <video id="remote" autoplay playsinline muted width="640" height="480"></video>
+      <br>
       <button id="startBtn">Start live stream</button>
-      <span id="fps" style="margin-left:.8rem;"></span>
+      <button id="endBtn" disabled>End live stream</button> 
     </section>
 
     <!-- FILE UPLOAD -->
@@ -50,7 +61,9 @@
       <div id="uploader">
         <p>Drop a file anywhere here<br><small>(or click to pick)</small></p>
       </div>
+      <br>
       <img id="resultPreview" style="display:none;margin-top:1rem;" />
+      <div id="loader" class="loader" style="display:none;"></div>
     </section>
   </main>
 
