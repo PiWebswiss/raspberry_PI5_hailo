@@ -8,7 +8,7 @@ It uses a **WebRTC-based** stream to send video frames from the user to the serv
 
 
 **In brief:**  
-The browser captures camera frames and streams them to the server using WebRTC. The server runs object detection and streams the annotated video back to the user.
+The browser capture camera frames and streams them to the server using WebRTC. The server runs object detection and streams the annotated video back to the user.
 
 **Video demonstration:**
 
@@ -16,11 +16,40 @@ The browser captures camera frames and streams them to the server using WebRTC. 
 
 ---
 
-Install:
+Install **WebRTC-based**:
 ```bash
 pip install aiortc
 ```
+Install **python-multipart**:
 
+- To read uploaded files sent by the user browser. 
+```bash
+pip install python-multipart
+```
+
+> Make sure that you have ``ffmpeg`` installed system-wide
+
+**Check that you have ``ffmpeg``**
+
+```bash
+ffmpeg -version`
+```
+**if not installed then run:** 
+
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
+
+Then, go to the file directory ``Web_app`` using ``cd <path>``.
+
+**Run the FastAPI Server**:
+   ```bash
+   uvicorn main:app --host 0.0.0.0 --port 8000
+   ```
+
+**Access the Video Stream**:
+   - Open a web browser and navigate to `http://127.0.0.1:8001/` to view the AI-processed video stream.
 
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
