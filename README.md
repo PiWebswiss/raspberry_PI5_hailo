@@ -1,17 +1,21 @@
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
- I’m using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page. All processing is done locally on the device using a Raspberry Pi 5 with the Hailo8L AI accelerator
+I’m using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page. All processing is done locally on the device using a Raspberry Pi 5 with the Hailo8L AI accelerator
 
-I'm still in development, so the HTML UI is not finished yet. I’ve only set it up for quick prototyping.
+I've build a user-friendly, real-time video loop web application called **`Web_app`**, which performs object detection using a Hailo model on a Raspberry Pi 5.
 
-I'm still testing whether WebSocket is faster than HTTP with the MJPEG format. So far, I'm getting about **double the performance using WebSocket**.
+I load all model, compiled for the Hailo-8L accelerator, using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
 If you find a mistake, feel free to drop a comment or open an issue on GitHub. Thanks!
 
-## Screenshot of a Video Stream via WebSocket
-![alt text](Ressources/Screenshot-FPS.png)
 
-I load the YOLOv8 model tailored for the Hailo8L device using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
+## Video demonstration ``Wep_app``:
+
+**In brief:**  
+The browser capture camera frames and streams them to the server using WebRTC. The server runs object detection and streams the annotated video back to the user.
+
+![alt text](Ressources/demo_web_app.gif)
+
 
 ## Demo 1 using Hailo Yolo11 nano model
 ![alt text](Ressources/demo-1.gif)
@@ -24,10 +28,11 @@ I load the YOLOv8 model tailored for the Hailo8L device using the [DeGirum SDK](
 
 The `HTTP` directory contains the **HTTP Streaming**: Streams the processed video frames to clients using the MJPEG format via FastAPI routes.
 
-
 The `WebSocket` directory contains the **WebSocket Streaming**: Streams that processed video frames to clients using the WebSocket via FastAPI routes.
 
 The `Webcam` directory contains the **Webcam Streaming**: Streams that processed video frames to clients using WebSocket via FastAPI routes.
+
+The `Wep_app` directory contains **user-friendly, real-time video loop web application**
 
 
 ## **Functionality Overview**
