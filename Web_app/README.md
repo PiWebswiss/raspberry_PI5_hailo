@@ -1,4 +1,4 @@
-# Web app 
+# Web app
 
 I'm building a user-friendly, real-time video loop web application called **`Web_app`**, which performs object detection using a Hailo model on a Raspberry Pi 5.
 
