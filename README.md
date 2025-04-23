@@ -2,10 +2,15 @@
 
 **note:**
 
-   ```bash
-   source ../../degirum_env/bin/activat
-   uvicorn main:app --host 0.0.0.0 --port 8000
-   ```
+```bash
+source ../../degirum_env/bin/activat
+
+```
+
+```bash
+
+uvicorn main:app --host 0.0.0.0 --port 8000
+```
 
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
