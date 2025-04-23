@@ -3,14 +3,28 @@
 **note:**
 
 ```bash
-source ../../degirum_env/bin/activat
-
+source ../../degirum_env/bin/activate
 ```
 
 ```bash
 
 uvicorn main:app --host 0.0.0.0 --port 8000
 ```
+## cloudflared tunnel setup :
+
+```bash
+# One command on the Pi (example with Cloudflare Tunnel)
+curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb -o cf.deb
+sudo apt install ./cf.deb
+cloudflared tunnel --url http://localhost:8000
+
+```
+**To use is just:**
+
+```bash
+cloudflared tunnel --url http://localhost:8000
+```
+
 
 ## Raspberry Pi 5 Running Hailo Model with a FastAPI Server 
 
