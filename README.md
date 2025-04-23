@@ -12,15 +12,30 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 ## cloudflared tunnel setup :
 
+### 1. One command on the Pi (example with Cloudflare Tunnel)
 ```bash
-# One command on the Pi (example with Cloudflare Tunnel)
+
 curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64.deb -o cf.deb
 sudo apt install ./cf.deb
-cloudflared tunnel --url http://localhost:8000
-
+``` 
+### 2. Start your FastAPI server first
+```bash
+uvicorn main:app --host 127.0.0.1 --port 8000
 ```
+
+### 3. In another terminal/tab, run the tunnel
+```bash
+cloudflared tunnel --url http://localhost:8000
+```
+---
+
 **To use is just:**
 
+### 1. Start your FastAPI server first
+```bash
+uvicorn main:app --host 127.0.0.1 --port 8000
+```
+### 2. In another terminal/tab, run the tunnel
 ```bash
 cloudflared tunnel --url http://localhost:8000
 ```
