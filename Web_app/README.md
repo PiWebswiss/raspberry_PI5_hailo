@@ -2,9 +2,7 @@
 
 I'm building a user-friendly, real-time video loop web application called **`Web_app`**, which performs object detection using a Hailo model on a Raspberry Pi 5.
 
-It uses a **WebRTC-based** stream to send video frames from the user to the server and back. WebRTC (~50 ms latency) is much faster than WebSocket-based solutions (~150 ms).
-
-I load all model, compiled for the Hailo-8L accelerator, using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
+I load all models, compiled for the Hailo-8L accelerator, using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
 **In brief:**  
 The browser capture camera frames and streams them to the server using WebRTC. The server runs object detection and streams the annotated video back to the user.
@@ -14,13 +12,22 @@ The browser capture camera frames and streams them to the server using WebRTC. T
 
 ---
 
+**Install DeGirum SDK**:
+   - Do the guided installation for [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
+
+**Activate the virtual environment**:
+Make sure to activate ``degirum_env``
+   ```bash
+   source degirum_env/bin/activate
+   ```
+
 Install **WebRTC-based**:
 ```bash
 pip install aiortc
 ```
 Install **python-multipart**:
 
-- To read uploaded files sent by the user browser. 
+This is used to uploaded files sent by the user browser. 
 ```bash
 pip install python-multipart
 ```
