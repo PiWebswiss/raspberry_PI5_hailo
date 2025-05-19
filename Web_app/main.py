@@ -11,6 +11,8 @@ from aiortc.contrib.media import MediaRelay
 from aiortc import RTCPeerConnection, RTCSessionDescription, VideoStreamTrack
 from av import VideoFrame
 
+### I use a WebRTC peer-to-peer (P2P) communication
+
 # Removing warnning just use C for YUV→BGR conversion on the Pi 5
 from av.logging import set_level, ERROR
 set_level(ERROR)
@@ -21,7 +23,10 @@ inference_host_address = "@local"
 zoo_url = "degirum/hailo"
 token = ''
 device_type = "HAILORT/HAILO8L"
-model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
+# - object detection models
+#model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
+# - pose estimation model
+model_name = "yolov8n_relu6_coco_pose--640x640_quant_hailort_hailo8l_1"
 
 # Load Degirum model
 model = dg.load_model(
@@ -44,22 +49,43 @@ app.mount(
     StaticFiles(directory=BASE_DIR / "templates" / "static"),
     name="static",
 )
+
+# Relay allows multiple consumers to access the same video stream without duplicating processing
 relay = MediaRelay()
+# Keeps track of all active peer connections for cleanup and management
 pcs = set()
 
+
+# Define class to run inference on the model and compute FPS.
 class AITransformTrack(VideoStreamTrack):
     """
     Pulls frames from the incoming client video track,
     runs the model, and returns annotated frames.
     """
     def __init__(self, track):
-        super().__init__()  # don't forget this!
+        super().__init__()  
         self.track = relay.subscribe(track)
+        self.track = relay.subscribe(track)
+        self.last_time = time.time()
+        self.fps = 0
 
     async def recv(self):
         frame = await self.track.recv()  # an av.VideoFrame
         img = frame.to_ndarray(format="bgr24")
+
+        # Update FPS
+        current_time = time.time()
+        delta = current_time - self.last_time
+        self.last_time = current_time
+        self.fps = 1 / delta if delta > 0 else 0
+
+        # Run model 
         annotated = model(img).image_overlay
+
+        # Add FPS overlay
+        text = f"FPS: {self.fps:.2f}"
+        cv2.putText(annotated, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 
+                    1, (0, 255, 0), 2, cv2.LINE_AA)
 
         new_frame = VideoFrame.from_ndarray(annotated, format="bgr24")
         # preserve timing
@@ -68,11 +94,12 @@ class AITransformTrack(VideoStreamTrack):
         return new_frame
 
 
-# HTML client interface
+# Route for main HTML client interface
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+# Route that handel uncoming and ungoing video track
 @app.post("/offer")
 async def offer(request: Request):
     """
@@ -106,6 +133,7 @@ async def offer(request: Request):
 # Valide video format
 VIDEO_EXTS = {".mp4", ".mov", ".avi", ".mkv", ".webm"}
 
+# Route that run inference on the video of the image the use gave
 @app.post("/detect")
 async def detect(file: UploadFile = File(...)):
     """
