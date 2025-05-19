@@ -23,10 +23,12 @@ inference_host_address = "@local"
 zoo_url = "degirum/hailo"
 token = ''
 device_type = "HAILORT/HAILO8L"
-# - object detection models
-#model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
-# - pose estimation model
-model_name = "yolov8n_relu6_coco_pose--640x640_quant_hailort_hailo8l_1"
+
+## Models 
+# - Object detection models
+model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
+# - Pose estimation model
+#model_name = "yolov8n_relu6_coco_pose--640x640_quant_hailort_hailo8l_1"
 
 # Load Degirum model
 model = dg.load_model(

@@ -15,11 +15,22 @@ The browser capture camera frames and streams them to the server using WebRTC. T
 **Install DeGirum SDK**:
    - Do the guided installation for [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
-**Activate the virtual environment**:
-Make sure to activate ``degirum_env``
-   ```bash
-   source degirum_env/bin/activate
-   ```
+
+**Activate the virtual environment:**
+
+Make sure the `degirum_env` environment is activated before running the application.
+
+If you're in the project root:
+
+```bash
+source degirum_env/bin/activate
+```
+
+If you're in a subdirectory:
+
+```bash
+source ../../degirum_env/bin/activate
+```
 
 Install **WebRTC-based**:
 ```bash
