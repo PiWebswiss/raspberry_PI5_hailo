@@ -1,4 +1,3 @@
-# Aide de chat GPT pour le code  https://chatgpt.com/share/6835809b-d67c-800e-a25a-fb28e45122e4
 import time
 import cv2
 import degirum as dg
