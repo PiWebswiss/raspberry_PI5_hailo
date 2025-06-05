@@ -1,0 +1,42 @@
+{
+  "Name": "yolo11n",
+  "ConfigVersion": 10,
+  "Checksum":"",
+
+  "DEVICE": [
+    {
+      "DeviceType": "HAILO8L",
+      "RuntimeAgent": "HAILORT",
+      "SupportedDeviceTypes": "HAILORT/HAILO8L, HAILORT/HAILO8"
+    }
+  ],
+
+  "PRE_PROCESS": [
+    {
+      "InputType": "Image",
+      "InputN": 1,
+      "InputH": 640,
+      "InputW": 640,
+      "InputC": 3,
+      "InputPadMethod": "letterbox",
+      "InputResizeMethod": "bilinear",
+      "InputQuantEn": true
+    }
+  ],
+
+  "MODEL_PARAMETERS": [
+    {
+      "ModelPath": "yolo11n.hef"
+    }
+  ],
+
+  "POST_PROCESS": [
+    {
+      "OutputPostprocessType": "Detection",
+      "PythonFile": "HailoDetectionYolo.py",
+      "OutputNumClasses": 80,
+      "LabelsPath": "labels_yolo11n.json",
+      "OutputConfThreshold": 0.30
+    }
+  ]
+}
