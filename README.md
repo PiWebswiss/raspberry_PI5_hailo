@@ -26,13 +26,13 @@ The browser capture camera frames and streams them to the server using WebRTC. T
 
 ## **Repository Structure**
 
-The `HTTP` directory contains the **HTTP Streaming**: Streams the processed video frames to clients using the MJPEG format via FastAPI routes.
+Here’s the revised **Repository Structure** section with your added detail about the training guide:
 
-The `WebSocket` directory contains the **WebSocket Streaming**: Streams that processed video frames to clients using the WebSocket via FastAPI routes.
-
-The `Webcam` directory contains the **Webcam Streaming**: Streams that processed video frames to clients using WebSocket via FastAPI routes.
-
-The `Wep_app` directory contains **user-friendly, real-time video loop web application**
+* **`HTTP` directory** – **HTTP Streaming**: Streams processed video frames to clients using the MJPEG format via FastAPI routes.
+* **`WebSocket` directory** – **WebSocket Streaming**: Streams processed video frames to clients over WebSocket via FastAPI routes.
+* **`Webcam` directory** – **Webcam Streaming**: Captures video from a webcam, processes it, and streams the annotated frames to clients over WebSocket via FastAPI routes.
+* **`Wep_app` directory** – **User-friendly real-time video loop web application**.
+* **`raspberry_PI5_hailo_web_app` directory** – Contains the **custom-trained YOLO 11 nano object detection model with a guide on how to train your own**, along with a complete front-end interface for interacting with the streaming server and viewing AI detection results live.
 
 
 ## **Functionality Overview**
