@@ -2,7 +2,7 @@
 
 I’m using a Raspberry Pi 5 with a Hailo AI chip to detect objects in a video and stream the results live to a web page. All processing is done locally on the device using a Raspberry Pi 5 with the Hailo8L AI accelerator
 
-I've build a user-friendly, real-time video loop web application called **`Web_app`**, which performs object detection using a Hailo model on a Raspberry Pi 5.
+My latest project **``raspberry_PI5_hailo_web_app``**, where I trained a custom YOLO 11 nano object detection model and deployed it on a Raspberry Pi 5 equipped with a Hailo AI accelerator. The system performs real-time object detection on video streams and broadcasts the annotated output to a web page via FastAPI.
 
 I load all model, compiled for the Hailo-8L accelerator, using the [DeGirum SDK](https://github.com/DeGirum/hailo_examples).
 
