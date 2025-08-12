@@ -25,6 +25,8 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 **Compile for Hailo (Colab notebook):**
 [Compile Hailo Model](https://colab.research.google.com/drive/1cI-a5BHdVLQiYJJdzprg2WqeuU2pA_YQ?usp=drive_link)
 
+> **(Early access) The best is just to use their Hailo compiler: [https://docs.degirum.com/ai-hub/compiler](https://docs.degirum.com/ai-hub/compiler)** it’s much simpler, does everything you need, and is currently free to use.
+
 ---
 
 ## Prerequisites
