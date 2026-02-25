@@ -3,7 +3,7 @@ import numpy as np
 from pathlib import Path
 import degirum as dg
 from fastapi import FastAPI, UploadFile, File, Request
-from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
+from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse, Response
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -26,7 +26,7 @@ device_type = "HAILORT/HAILO8L"
 
 ## Models 
 # - Object detection models
-model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
+model_name ="yolo11n_coco--640x640_quant_hailort_multidevice_1"
 # - Pose estimation model
 #model_name = "yolov8n_relu6_coco_pose--640x640_quant_hailort_hailo8l_1"
 
@@ -100,6 +100,12 @@ class AITransformTrack(VideoStreamTrack):
 @app.get("/", response_class=HTMLResponse)
 def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+
+@app.get("/favicon.ico")
+def favicon():
+    # Avoid browser console 404 when no favicon file is provided.
+    return Response(status_code=204)
 
 # Route that handel uncoming and ungoing video track
 @app.post("/offer")

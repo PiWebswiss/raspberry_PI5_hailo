@@ -23,7 +23,7 @@ model = dg.load_model(
 
 ## 2. Load Hailo model (yolo11n)
 """ model = dg.load_model(
-    model_name="yolo11n_coco--640x640_quant_hailort_multidevice_1", 
+    model_name ="yolo11n_coco--640x640_quant_hailort_multidevice_1"
     inference_host_address="@local",
     zoo_url="degirum/hailo", 
     token="",

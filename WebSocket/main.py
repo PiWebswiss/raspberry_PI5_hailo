@@ -11,7 +11,7 @@ inference_host_address = "@local"
 zoo_url = "degirum/hailo"
 token = ''
 device_type = "HAILORT/HAILO8L"
-model_name = "yolo11n_silu_coco--640x640_quant_hailort_hailo8l_1"
+model_name ="yolo11n_coco--640x640_quant_hailort_multidevice_1"
 video_source = '../Ressources/road_trafifc.mp4'
 
 # Load Degirum model
