@@ -13,22 +13,22 @@ import asyncio
 
 # Load Hailo model
 ## 1. Load costume model
-model = dg.load_model(
+""" model = dg.load_model(
     model_name="my_yolov11n", # Model name
     inference_host_address="@local",
     zoo_url="hailo_model", # link to the custom model folder
     token="",
     device_type="HAILORT/HAILO8L",
-)
+) """
 
 ## 2. Load Hailo model (yolo11n)
-""" model = dg.load_model(
-    model_name ="yolo11n_coco--640x640_quant_hailort_multidevice_1"
+model = dg.load_model(
+    model_name ="yolo11n_coco--640x640_quant_hailort_multidevice_1",
     inference_host_address="@local",
     zoo_url="degirum/hailo", 
     token="",
     device_type="HAILORT/HAILO8L",
-) """
+    )
 
 # FastAPI setup
 # Help : https://chatgpt.com/c/683ebaec-e754-800e-b3db-77546297fbce
