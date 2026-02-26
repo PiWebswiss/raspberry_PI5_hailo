@@ -95,7 +95,6 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 4. **View the stream**
    Open your browser to `http://127.0.0.1:8000/` to see the AI-processed video.
 
-
 ---
 
 ## Sources & References
@@ -197,5 +196,4 @@ These were used to assist with debugging, optimization, and development choices.
 * [Chat 1](https://chatgpt.com/c/6838601a-6ee0-800e-afb3-1a5636e2fb01)
 * [Chat 2](https://chatgpt.com/share/6838291d-cdf4-800e-af62-9ae145e8e58f)
 * [Chat 3](https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d)
-
 
