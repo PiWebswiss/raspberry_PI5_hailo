@@ -57,7 +57,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
    pip install -r requirements.txt
    ```
 
-4. **Register the virtual environment in Jupyter (optional)**
+4. **Register the virtual environment in Jupyter**
 
    ```bash
    python -m ipykernel install --user --name=degirum_env --display-name "Python (degirum_env)"
@@ -72,7 +72,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 6. **Clone this GitHub repository**
 
  ```bash
-   https://github.com/PiWebswiss/raspberry_PI5_hailo_web_app.git
+   git clone https://github.com/PiWebswiss/raspberry_PI5_hailo_web_app.git
    cd raspberry_PI5_hailo_web_app
    ```
 ---
@@ -94,6 +94,31 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 
 4. **View the stream**
    Open your browser to `http://127.0.0.1:8000/` to see the AI-processed video.
+
+
+---
+
+## People Count
+
+The web UI shows two live counters:
+
+* **Persons now**: how many tracked people are visible in the current frame.
+* **Unique persons**: how many different tracked people have been seen since the stream started.
+
+### Simple logic used
+
+1. The model detects objects and keeps only detections labeled `person`.
+2. For each detected person, the app uses the center of the bounding box.
+3. Across frames, the app matches each center to the closest previous track (if close enough).
+4. If no previous track matches, a new track ID is created.
+5. `Unique persons` increases only when a brand-new track ID appears.
+
+### Limits
+
+* This is **tracking-based**, not true identity recognition.
+* The same real person can be counted again if they disappear (out of frame) and later come back as a new track.
+* Two people very close together can sometimes swap tracks.
+
 
 ---
 

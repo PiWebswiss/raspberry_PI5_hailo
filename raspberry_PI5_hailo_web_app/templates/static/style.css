@@ -5,6 +5,10 @@
   --panel:  #383838;
   --accent: #2f81f7;
   --text:   #c9d1d9;
+  --muted:  #8b949e;
+  --ok:     #73d89f;
+  --warn:   #ffd166;
+  --bad:    #ff6b6b;
   --radius: 14px;
 }
 
@@ -33,6 +37,11 @@ body {
   padding:         2rem;
 }
 
+main {
+  width: 100%;
+  max-width: 720px;
+}
+
 
 /* Page Header */
 header {
@@ -58,6 +67,10 @@ header {
 
 .padding_buttom {
     padding-bottom: 0.5rem;
+}
+
+.controls {
+  text-align: center;
 }
 
 button {
@@ -93,4 +106,64 @@ p {
   margin: 1rem 0;
   font-size: 1.1rem;
   text-align: center;
+}
+
+.stats-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.stat-card {
+  background: linear-gradient(145deg, rgba(47, 129, 247, 0.16), rgba(255, 255, 255, 0.03));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: calc(var(--radius) - 4px);
+  padding: 0.85rem;
+}
+
+.stat-card p {
+  margin: 0;
+  text-align: left;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  margin-top: 0.35rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.status-text {
+  color: var(--muted);
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+}
+
+.status-text.connected {
+  color: var(--ok);
+}
+
+.status-text.error {
+  color: var(--bad);
+}
+
+@media (max-width: 760px) {
+  body {
+    padding: 1rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 }

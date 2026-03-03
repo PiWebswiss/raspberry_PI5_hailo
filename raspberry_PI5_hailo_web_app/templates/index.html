@@ -13,13 +13,26 @@
 
   <!-- help with the code https://chatgpt.com/share/68383000-066c-800e-8ae4-a21eb074307d -->
   <main>
-    <h2 class="padding_buttom">🔴 Live stream</h2>
+    <h2 class="padding_buttom">Live stream</h2>
     <div class="card">
       <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
-      <div style="text-align:center;">
+      <div class="controls">
         <button id="startBtn">Start</button>
         <button id="stopBtn" disabled>Stop</button>
       </div>
+      <!-- Live counters updated from WebSocket JSON stats messages. -->
+      <section class="stats-grid">
+        <article class="stat-card">
+          <p class="stat-label">Persons now</p>
+          <p class="stat-value" id="personsNow">0</p>
+        </article>
+        <article class="stat-card">
+          <p class="stat-label">Unique persons</p>
+          <p class="stat-value" id="uniquePersons">0</p>
+        </article>
+      </section>
+      <!-- Connection state text: "Streaming", "Stream stopped", or "Stream error". -->
+      <p id="streamStatus" class="status-text">Stream stopped</p>
     </div>
   </main>
 
