@@ -6,7 +6,7 @@ This project uses a Raspberry Pi 5 equipped with a Hailo AI accelerator to perf
 ![web_app_live](templates/static/ressources/web_app_live.png)
 
 **Screenshot of the web app displaying live object detection results.**
-![Screenshot_web_app_live](Screenshot_web_app_live.png)
+![web_app_live](web_app_live.jpg)
 ---
 
 ## Repository Structure
